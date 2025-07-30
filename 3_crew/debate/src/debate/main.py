@@ -5,13 +5,6 @@ import warnings
 from datetime import datetime
 
 from debate.crew import Debate
-load_dotenv(override=True)
-
-
-openai_api_key = os.getenv('OPENAI_API_KEY')
-anthropic_api_key = os.getenv('ANTHROPIC_API_KEY')
-groq_api_key = os.getenv('GROQ_API_KEY')
-
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -25,7 +18,7 @@ def run():
     Run the crew.
     """
     inputs = {
-        'motion': 'In Data, Everything should not be moved to the cloud. For some industries and organizations its better to remain on-premise ',
+        'motion': 'There needs to be strict laws to regulate LLMs',
     }
     
     try:

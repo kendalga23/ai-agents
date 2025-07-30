@@ -82,4 +82,3 @@ class ResearchManager:
         )
         print("Email sent")
         return report
-        

@@ -1,8 +1,6 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from openai import OpenAI
-from anthropic import anthropic
-load_dotenv(override=True)
+
 
 @CrewBase
 class Debate():

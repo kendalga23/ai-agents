@@ -18,9 +18,6 @@ class TrendingCompanyList(BaseModel):
     """ List of multiple trending companies that are in the news """
     companies: List[TrendingCompany] = Field(description="List of companies trending in the news")
 
-   ##------------------------------------------------------------------------------------------------------------
-   # List is Specified when you want know there could be multiple things and you always want a list returned 
-   # ----------------------------------------------------------------------------------------------------------------
 class TrendingCompanyResearch(BaseModel):
     """ Detailed research on a company """
     name: str = Field(description="Company name")
@@ -44,11 +41,7 @@ class StockPicker():
     def trending_company_finder(self) -> Agent:
         return Agent(config=self.agents_config['trending_company_finder'],
                      tools=[SerperDevTool()], memory=True)
-    ##------------------------------------------------------------------------------------------------
-    # Serper DevTool - is used for reduced effort and faster markdown on AI retrieval of websites
-    # --------------This is useful and maybe very relevant for Competitive Tool Analysis ---------------
-
-
+    
     @agent
     def financial_researcher(self) -> Agent:
         return Agent(config=self.agents_config['financial_researcher'], 
@@ -58,9 +51,7 @@ class StockPicker():
     def stock_picker(self) -> Agent:
         return Agent(config=self.agents_config['stock_picker'], 
                      tools=[PushNotificationTool()], memory=True)
-    ## Pydantic Output below forces the output to represent output of another Class that has been defined
-    #---
-    # ---------------------------------------------------------------------------------------------------
+    
     @task
     def find_trending_companies(self) -> Task:
         return Task(
@@ -92,9 +83,7 @@ class StockPicker():
             config=self.agents_config['manager'],
             allow_delegation=True
         )
-            ##------------------------------------------------------------------------------------------------
-            ## Similar To Hand-Offs in OpenAI Delegation allows dellegation of agents as necessary
-            ##--------------------------------------------------------------------------------------------------
+            
         return Crew(
             agents=self.agents,
             tasks=self.tasks, 

@@ -45,5 +45,3 @@ test_engineer:
   backstory: >
     You're a seasoned QA engineer and software developer who writes great unit tests for python code.
   llm: anthropic/claude-3-7-sonnet-latest
-
-  ##will need to evalule models and reason for choosing models.

@@ -3,8 +3,6 @@ import sys
 import warnings
 import os
 from datetime import datetime
-from anthropic import anthropic
-import openai
 
 from engineering_team.crew import EngineeringTeam
 
@@ -31,7 +29,7 @@ class_name = "Account"
 
 def run():
     """
-    Run the engineering crew.
+    Run the research crew.
     """
     inputs = {
         'requirements': requirements,
@@ -42,12 +40,6 @@ def run():
     # Create and run the crew
     result = EngineeringTeam().crew().kickoff(inputs=inputs)
 
-
-##--------------------------------------------------------------------------------------------------------------
-#This code is needed to ensure that run() is only called when the script is executed directly, 
-# not when it is imported as a module. 
-# This is a best practice in Python for writing reusable and maintainable code.
-#--------------------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
     run()

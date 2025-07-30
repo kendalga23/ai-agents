@@ -1,11 +1,9 @@
 import gradio as gr
 from dotenv import load_dotenv
 from research_manager import ResearchManager
-from agents import Runner, trace, gen_trace_id
-
-
 
 load_dotenv(override=True)
+
 
 async def run(query: str):
     async for chunk in ResearchManager().run(query):
