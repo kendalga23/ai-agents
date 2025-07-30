@@ -1,0 +1,55 @@
+design_task:
+  description: >
+    Analyze the provided {requirements} and produce a detailed design for a Python backend module.
+    The design should include function and method signatures, class structure, and a clear plan for implementation.
+    Ensure the design is self-contained and ready for a backend engineer to implement, everything should be in 1 module.
+    IMPORTANT: only output the design in markdown format, layout out in detail the classes and functions in the module.
+  expected_output: >
+    a detailed design for the engineer, identifying the classess and functions in the module.
+  agent: engineer_lead
+  input_variables:{requirements}  ## Tutorial was slighly different, but I'm not sure how much this imapcts tit.
+  output_file: output{module_name}_design.md
+  ##--------------------------------------------------------------------------------------------------------------------------------
+  ## This is good to know that output files can become variables that are passed through
+  ###-----------------------------------------------------------------------------------------------------------------------------
+
+code_task:
+  description: >
+    Implement the Python backend module according to the detailed design provided by the engineering lead.
+    The implementation should be self-contained, follow the specified module and class names, and be ready for testing or UI integration.
+  expected_output: >
+    A complete Python module file that matches the design, with all classes and methods implemented as described.
+    The code should be clean, efficient, and ready for use.
+  agent: backend_engineer
+  context:
+    - design_task 
+    ##----Context will be for CrewAI agents as we disover away to pass context around more effectively
+    ##-------------------------Memory and Journaling will be Ke ---------------------------###
+  output_file: output{module_name}
+
+frontend_task:
+  description: >
+    Write a gradio UI in a module app.py that demonstrates the given backend class in {module_name}.
+    Assume there is only 1 user, and keep the UI clean- just prototype or demo.
+    Here are the requirements {requirements}
+  expected_output: >
+    A gradio UI in Module app.py that demonstrates the given backend class.
+    The file should be ready so that it can be run as-is, in the same directory as the backend moduel, and it should.
+    IMPORTANT: Output ONLY the raw Python code without any markdown formatting, code block delimeters, or backticking.
+    the output should be valid Python code that can abe directly saved to a file and executed.
+  agent: frontend_engineer
+  context: 
+    - code_task
+  output_file: output/app.py
+
+test_task:
+description: >
+  Write unit tests for the given backend module {module_name} and create a test_{module_name} in the same directory.
+expected_output: >
+  a test_{module_name} module that tests the given backend module.
+  IMPORTANT: Output ONLY the raw python code without any markdown formatting, code block delimiters, or backticking.
+  The output should be valid Python code that can be directly saved to a file and executed.
+agent: test_engineer
+context: 
+  - code_task
+output_file: output/test_{module_name}
